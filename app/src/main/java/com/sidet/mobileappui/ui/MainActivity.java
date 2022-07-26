@@ -1,8 +1,10 @@
-package com.sidet.mobileappui;
+package com.sidet.mobileappui.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.sidet.mobileappui.R;
 
 public class MainActivity extends AppCompatActivity {
 
