@@ -31,9 +31,11 @@
         android:layout_height="wrap_content"/>
 
     <EditText
+
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"/>
 
     <Button
         android:text="Login"

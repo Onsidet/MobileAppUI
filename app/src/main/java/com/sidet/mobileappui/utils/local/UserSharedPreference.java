@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.sidet.mobileappui.models.User;
+import com.sidet.mobileappui.ui.MainActivity;
 
 public class UserSharedPreference {
     public static void setUser(Context context, User user){
@@ -30,5 +31,13 @@ public class UserSharedPreference {
         }
 
         return null;
+    }
+
+    public static void removeUser(Context context) {
+        SharedPreferences.Editor editor = context.getSharedPreferences("USER",Context.MODE_PRIVATE).edit();
+        editor.remove("ID");
+        editor.remove("USERNAME");
+        editor.remove("PASSWORD");
+        editor.apply();
     }
 }
