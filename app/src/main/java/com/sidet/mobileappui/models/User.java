@@ -5,6 +5,15 @@ public class User {
     private int id;
     private String username;
     private String password;
+    private String accessToken;
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
 
     public int getId() {
         return id;

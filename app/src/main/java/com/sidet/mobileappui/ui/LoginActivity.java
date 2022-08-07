@@ -1,21 +1,23 @@
 package com.sidet.mobileappui.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
 import com.sidet.mobileappui.R;
 import com.sidet.mobileappui.app.BaseActivity;
 import com.sidet.mobileappui.models.User;
+import com.sidet.mobileappui.models.res.LoginRes;
+import com.sidet.mobileappui.presenters.LoginPresenter;
 import com.sidet.mobileappui.utils.local.UserSharedPreference;
+import com.sidet.mobileappui.views.LoginView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements LoginView {
     private EditText etUsername, etPassword;
     private Button btnLogin;
+    private LoginPresenter loginPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,8 +28,8 @@ public class LoginActivity extends BaseActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = etUsername.getText().toString();
-                String password = etPassword.getText().toString();
+                String username = etUsername.getText().toString().trim();
+                String password = etPassword.getText().toString().trim();
 
                 if(username.equals("")){
                     showMessage("Username is empty");
@@ -37,14 +39,8 @@ public class LoginActivity extends BaseActivity {
                     showMessage("Password is empty");
                     return;
                 }
-                User user = new User();
-                user.setId(1);
-                user.setUsername(username);
-                user.setPassword(password);
-                UserSharedPreference.setUser(LoginActivity.this,user);
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+
+                loginPresenter.login(username,password);
             }
         });
 
@@ -60,9 +56,48 @@ public class LoginActivity extends BaseActivity {
         etUsername  = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
+        loginPresenter = new LoginPresenter(this);
     }
 
-    private void showMessage(String message){
-        Toast.makeText(this,message,Toast.LENGTH_LONG).show();
+
+
+    @Override
+    public void onLoading(String message) {
+        showMessage(message);
+    }
+
+    @Override
+    public void onHideLoading(String message) {
+        showMessage(message);
+    }
+
+    @Override
+    public void onSuccess(String message) {
+        showMessage(message);
+    }
+
+    @Override
+    public void onError(String message) {
+        showMessage(message);
+    }
+
+    @Override
+    public void onServerError(String message) {
+        showMessage(message);
+    }
+
+    @Override
+    public void onLoginSuccess(LoginRes res) {
+
+        User user = new User();
+        user.setId(1);
+        user.setUsername(res.getUsername());
+        user.setPassword(res.getAccessToken());
+        user.setAccessToken(res.getAccessToken());
+        UserSharedPreference.setUser(LoginActivity.this,user);
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
+        showMessage("Login Successfully!");
+        finish();
     }
 }

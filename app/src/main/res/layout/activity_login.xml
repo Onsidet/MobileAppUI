@@ -7,11 +7,20 @@
     android:orientation="vertical"
     android:padding="40dp"
     tools:context=".ui.LoginActivity">
+    <ImageView
+        android:src="@drawable/ic_baseline_supervised_user_circle_24"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
 
     <TextView
+        android:textColor="#2196F3"
         android:text="Login"
         android:textSize="32dp"
         android:textAlignment="center"
+        android:textStyle="bold"
+        android:layout_marginBottom="40dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <TextView
@@ -39,6 +48,7 @@
 
     <Button
         android:text="Login"
+        android:backgroundTint="#2196F3"
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

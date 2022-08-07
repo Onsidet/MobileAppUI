@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MobileAppUI</string>
+    <string name="category_list">Category List</string>
 </resources>
